@@ -1,0 +1,8 @@
+*.o
+gzrom*
+initmips.c
+pmon.bin*
+tags
+boot*.log
+/gzrom.S
+/pmon.S
