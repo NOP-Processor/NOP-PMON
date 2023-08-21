@@ -2205,24 +2205,24 @@ static struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 	 * Reset the chip, required by some chips (e.g. Micron MT29FxGxxxxx)
 	 * after power-up
 	 */
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 	chip->cmdfunc(mtd, NAND_CMD_RESET, -1, -1);
-	printf("  func = 0x%08x\n", (int) chip->cmdfunc);
-	printf("<type> %d\n", __LINE__);
+	// printf("  func = 0x%08x\n", (int) chip->cmdfunc);
+	// printf("<type> %d\n", __LINE__);
 
 
 	/* Send the command for reading device ID */
 	chip->cmdfunc(mtd, NAND_CMD_READID, 0x00, -1);
 
 	/* Read manufacturer and device IDs */
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 	*maf_id = chip->read_byte(mtd);
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 	dev_id = chip->read_byte(mtd);
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 	/* Try again to make sure, as some systems the bus-hold or other
 	 * interface concerns can cause random data which looks like a
@@ -2231,13 +2231,13 @@ static struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 	 */
 
 	chip->cmdfunc(mtd, NAND_CMD_READID, 0x00, -1);
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 
 	/* Read manufacturer and device IDs */
 
 	tmp_manf = chip->read_byte(mtd);
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 	tmp_id = chip->read_byte(mtd);
 
@@ -2268,11 +2268,11 @@ static struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 	if (!type->pagesize) {
 		int extid;
 		/* The 3rd id byte contains non relevant data ATM */
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 		extid = chip->read_byte(mtd);
 		/* The 4th id byte is the important one */
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 		extid = chip->read_byte(mtd);
 		/* Calc pagesize */
@@ -2355,7 +2355,7 @@ static struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 	/* Do not replace user supplied command function ! */
 	if (mtd->writesize > 512 && chip->cmdfunc == nand_command)
 		chip->cmdfunc = nand_command_lp;
-	printf("<type> %d\n", __LINE__);
+	// printf("<type> %d\n", __LINE__);
 
 	printk(KERN_INFO "NAND device: Manufacturer ID:"
 	       " 0x%02x, Chip ID: 0x%02x (%s %s)\n", *maf_id, dev_id,
@@ -2404,18 +2404,18 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 	/* Get buswidth to select the correct functions */
 	busw = chip->options & NAND_BUSWIDTH_16;
 	/* Set the default functions */
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 	nand_set_defaults(chip, busw);
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 
 	/* Read the flash type */
 	type = nand_get_flash_type(mtd, chip, busw, &nand_maf_id);
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 
 	if (IS_ERR(type)) {
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 		printk(KERN_WARNING "No NAND device found!!!\n");
 		chip->select_chip(mtd, -1);
@@ -2424,19 +2424,19 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 
 	/* Check for a chip array */
 	for (i = 1; i < maxchips; i++) {
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 		chip->select_chip(mtd, i);
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 		/* Send the command for reading device ID */
 		chip->cmdfunc(mtd, NAND_CMD_READID, 0x00, -1);
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 		/* Read manufacturer and device IDs */
 		if (nand_maf_id != chip->read_byte(mtd) ||
 		    type->id != chip->read_byte(mtd)) {
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 			break;
 		}
@@ -2447,11 +2447,11 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 	/* Store the number of chips and calc total size for mtd */
 	chip->numchips = i;
 	mtd->size = i * chip->chipsize;
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 	/* Preset the internal oob write buffer */
 	memset(chip->buffers.oobwbuf, 0xff, mtd->oobsize);
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 
 	/*
@@ -2480,14 +2480,14 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 			BUG();
 		}
 	}
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 
 	/*
 	 * check ECC mode, default to software if 3byte/512byte hardware ECC is
 	 * selected and we have 256 byte pagesize fallback to software ECC
 	 */
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 	switch (chip->ecc.mode) {
 
@@ -2587,7 +2587,7 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 		       chip->ecc.mode);
 		BUG();
 	}
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 	/*
 	 * The number of bytes available for a client to place data into
@@ -2604,7 +2604,7 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 	 */
 	chip->ecc.steps = mtd->writesize / chip->ecc.size;
 	if(chip->ecc.steps * chip->ecc.size != mtd->writesize) {
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 		printk(KERN_WARNING "Invalid ecc parameters\n");
 		BUG();
@@ -2613,11 +2613,11 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 
 	/* Initialize state */
 	chip->state = FL_READY;
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 	/* De-select the device */
 	chip->select_chip(mtd, -1);
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 	/* Invalidate the pagebuffer reference */
 	chip->pagebuf = -1;
@@ -2647,7 +2647,7 @@ int nand_scan(struct mtd_info *mtd, int maxchips)
 	/* Check, if we should skip the bad block table scan */
 	if (chip->options & NAND_SKIP_BBTSCAN)
 		return 0;
-	printf("<scan> %d\n", __LINE__);
+	// printf("<scan> %d\n", __LINE__);
 
 	/* Build bad block table */
 	return chip->scan_bbt(mtd);

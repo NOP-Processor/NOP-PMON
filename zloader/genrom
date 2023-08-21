@@ -72,15 +72,6 @@ asm volatile(\
 
 void led_on(char witch)
 {
-asm volatile(\
-	"	li.w	    \$r4, 0xbfd0f000;\\n" \
-	"	ld.b	\$r5, \$r4, 0;\\n"
-	"	and     \$r5, \$r5, \%0;\\n"
-	"	st.b 	\$r5, \$r4, 0; \\n" \
-	:
-	:"r"(witch)
-	: "\$r4", "\$r5"
-	);
 }
 
 void initmips(unsigned int msize,int dmsize,int dctrl)

@@ -600,7 +600,7 @@ dbginit (char *adr)
 
 	__init();	/* Do all constructor initialisation */
 
-	SBD_DISPLAY ("ENVI", CHKPNT_ENVI);
+	// SBD_DISPLAY ("ENVI", CHKPNT_ENVI);
 	envinit ();
 
 #if defined(SMP)
@@ -609,30 +609,30 @@ dbginit (char *adr)
 		md_cacheon();
 #endif
 
-	SBD_DISPLAY ("SBDD", CHKPNT_SBDD);
+	// SBD_DISPLAY ("SBDD", CHKPNT_SBDD);
 	tgt_devinit();
 
 #ifdef INET
-	SBD_DISPLAY ("NETI", CHKPNT_NETI);
+	// SBD_DISPLAY ("NETI", CHKPNT_NETI);
 	init_net (1);
 #endif
 
 #if NCMD_HIST > 0
-	SBD_DISPLAY ("HSTI", CHKPNT_HSTI);
+	// SBD_DISPLAY ("HSTI", CHKPNT_HSTI);
 	histinit ();
 #endif
 
 #if NMOD_SYMBOLS > 0
-	SBD_DISPLAY ("SYMI", CHKPNT_SYMI);
+	// SBD_DISPLAY ("SYMI", CHKPNT_SYMI);
 	syminit ();
 #endif
 
 #ifdef DEMO
-	SBD_DISPLAY ("DEMO", CHKPNT_DEMO);
+	// SBD_DISPLAY ("DEMO", CHKPNT_DEMO);
 	demoinit ();
 #endif
 
-	SBD_DISPLAY ("SBDE", CHKPNT_SBDE);
+	// SBD_DISPLAY ("SBDE", CHKPNT_SBDE);
 	initial_sr |= tgt_enable (tgt_getmachtype ());
 
 #ifdef SR_FR

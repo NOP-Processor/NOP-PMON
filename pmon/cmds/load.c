@@ -182,7 +182,7 @@ nload (argc, argv)
 		printf("boot what?\n");
 	}
 
-	printf("<nload> path = %s\n", path);  // path = tftp://10.0.0.1/vmlinux.strip
+	// printf("<nload> path = %s\n", path);  // path = tftp://10.0.0.1/vmlinux.strip
 
 
 	if ((bootfd = open (path, O_RDONLY | O_NONBLOCK)) < 0) {
@@ -215,7 +215,7 @@ nload (argc, argv)
 #endif
 
 	dl_initialise (offset, flags);
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 	fprintf (stderr, "Loading file: %s ", path);
 	errno = 0;
@@ -224,57 +224,57 @@ nload (argc, argv)
 	if (flags & RFLAG) {
 	   ExecId id;
 
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 
 	   id = getExec("bin");
 	   if (id != NULL) {
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		   ep = exec (id, bootfd, buf, &n, flags);
 	   }
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 	} else {
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);  // here
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);  // here
 
 		if(flags&OFLAG){
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		dl_Oloadbuffer=malloc(0x1000);
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		if(dl_Oloadbuffer)
 		 {
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		  ep = exec (NULL, bootfd, buf, &n, flags);
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		  free(dl_Oloadbuffer);
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		 }
 		else {
 			ep=-1;
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 		}
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 		
 		}
 		else {
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 			ep = exec (NULL, bootfd, buf, &n, flags);  // this is executed!
 		}
 	}
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 
 	close (bootfd);
 	putc ('\n', stderr);
-	printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
+	// printf("<nload> file: %s, line: %d\n", __FILE__, __LINE__);
 
 
 	if (ep == -1) {

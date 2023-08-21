@@ -108,8 +108,12 @@ locate:
     la      s0, uncached 
     sub.w   s0, ra, s0
 
-    li.w      t0, 0x33333333 
+    li.w      t0, 0x20230818 
     li.w      a0, 0xbfd0f010 
+    st.w    t0, a0, 0  
+
+    li.w      a0, 0xbfd0f000 
+    li.w      t0, 0xffffffff
     st.w    t0, a0, 0  
     //la      s0, uncached 
     //sub.w   s0, ra, s0  

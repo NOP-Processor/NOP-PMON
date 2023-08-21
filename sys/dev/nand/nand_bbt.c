@@ -354,7 +354,7 @@ static int scan_block_fast(struct mtd_info *mtd, struct nand_bbt_descr *bd,
 		}
 
 		if (check_short_pattern(buf, bd)) {
-			printk(KERN_WARNING "  check_short_pattern != 0\n", ret);
+			// printk(KERN_WARNING "  check_short_pattern != 0\n", ret);
 			return 1;
 		}
 

@@ -253,7 +253,7 @@ newsym (name, value)
     unsigned int h;
     int		len;
 
-    puts("newsym");
+    // puts("newsym");
 
     h = strhash (name) % NHASH;
     for (sym = symhash[h]; sym; sym = sym->next) {

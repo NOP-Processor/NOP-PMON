@@ -776,41 +776,41 @@ static void ls1g_nand_cmdfunc(struct mtd_info *mtd, unsigned command,int column,
                     unsigned int id_val_l=0,id_val_h=0;
                     unsigned int timing = 0;
                     unsigned char *data = (unsigned char *)(info->data_buff);
-                    printf("nand read id %d\n", __LINE__);
+                    // printf("nand read id %d\n", __LINE__);
 //                    _NAND_READ_REG(0xc,timing);
   //                  _NAND_SET_REG(0xc,0x30f0); 
                     _NAND_SET_REG(0x0,0x21); 
-                    printf("nand read id %d\n", __LINE__);
+                    // printf("nand read id %d\n", __LINE__);
 
 
                     do {                    
-                        printf("nand read id %d\n", __LINE__);
+                        // printf("nand read id %d\n", __LINE__);
                         id_val_h = _NAND_IDH;
                     }
                     while(!((id_val_l |= _NAND_IDL) & 0xff));
-                    printf("nand read id %d\n", __LINE__);
+                    // printf("nand read id %d\n", __LINE__);
 
 //  0000 0000 - 07ff ffff
 
 //  1000 0000
 
 //                    _NAND_SET_REG(0xc,timing);
-                    printf("data address is %lx\n", data);
-                    printf("id_val h is %lx  l is %lx\n", id_val_h, id_val_l);
+                    // printf("data address is %lx\n", data);
+                    // printf("id_val h is %lx  l is %lx\n", id_val_h, id_val_l);
                     data[0]  = (id_val_h & 0xff);
-                                        printf("nand read id %d\n", __LINE__);
+                                        // printf("nand read id %d\n", __LINE__);
 
                     data[1]  = (id_val_l & 0xff000000)>>24;
-                                        printf("nand read id %d\n", __LINE__);
+                                        // printf("nand read id %d\n", __LINE__);
 
                     data[2]  = (id_val_l & 0x00ff0000)>>16;
-                                        printf("nand read id %d\n", __LINE__);
+                                        // printf("nand read id %d\n", __LINE__);
 
                     data[3]  = (id_val_l & 0x0000ff00)>>8;
-                                        printf("nand read id %d\n", __LINE__);
+                                        // printf("nand read id %d\n", __LINE__);
 
                     data[4]  = (id_val_l & 0x000000ff);
-                                        printf("nand read id %d\n", __LINE__);
+                                        // printf("nand read id %d\n", __LINE__);
 
                 }
                 break;

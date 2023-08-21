@@ -57,7 +57,7 @@ netfs_init(NetFileOps *fs)
 
 int netopen (int fd, const char *path, int flags, int perms)
 {
-	printf("<netopen> fd = %d, path=%s, flags=%x, perms=%x\n", fd, path, flags, perms);
+	// printf("<netopen> fd = %d, path=%s, flags=%x, perms=%x\n", fd, path, flags, perms);
 	NetFileOps *ops;
 	struct	Url url;
 	NetFile *nfp;
@@ -96,16 +96,16 @@ int netread (int fd, void *buf, size_t nb)
 {
 
 	NetFile *nfp;
-	printf("<netread> fd = %d, buf=%x, nb=%d\n", fd, buf, nb);
+	// printf("<netread> fd = %d, buf=%x, nb=%d\n", fd, buf, nb);
 
 	nfp = (NetFile *)_file[fd].data;
 
 	if (nfp->ops->fo_read) {
-		printf("<netread> nfp->ops->fo_read=%x\n", (u_int32_t) nfp->ops->fo_read);
+		// printf("<netread> nfp->ops->fo_read=%x\n", (u_int32_t) nfp->ops->fo_read);
 		return ((nfp->ops->fo_read) (fd, buf, nb));
 	}
 	else {
-		printf("<netread> nfp->ops->fo_read is 0\n");
+		// printf("<netread> nfp->ops->fo_read is 0\n");
 		return (-1);
 	}
 }
@@ -126,7 +126,7 @@ int netwrite (int fd, const void *buf, size_t nb)
 off_t netlseek (int fd, off_t offs, int how)
 {
 	NetFile *nfp;
-	printf("<netlseek> fd = %d, offs=%d, how=%d\n", fd, offs, how);
+	// printf("<netlseek> fd = %d, offs=%d, how=%d\n", fd, offs, how);
 
 	nfp = (NetFile *)_file[fd].data;
 

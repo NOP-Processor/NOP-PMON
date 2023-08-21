@@ -262,7 +262,7 @@ initmips(unsigned int memsz)
 	 *  Probe clock frequencys so delays will work properly.
 	 */
 	tgt_cpufreq();
-	SBD_DISPLAY("DONE",0);
+	// SBD_DISPLAY("DONE",0);
 	
 	/*
 	 *  Init PMON and debug
@@ -273,19 +273,19 @@ initmips(unsigned int memsz)
 	/*
 	 *  Set up exception vectors.
 	 */
-	SBD_DISPLAY("BEV1",0);
+	// SBD_DISPLAY("BEV1",0);
 	//bcopy(MipsException, (char *)TLB_MISS_EXC_VEC, MipsExceptionEnd - MipsException);
 	bcopy(MipsException, (char *)GEN_EXC_VEC, MipsExceptionEnd - MipsException);
 
-	SBD_DISPLAY("BEV2",0);
+	// SBD_DISPLAY("BEV2",0);
 	CPU_FlushCache();
-	SBD_DISPLAY("BEV3",0);
+	// SBD_DISPLAY("BEV3",0);
 
 	//CPU_SetSR(0, SR_BOOT_EXC_VEC); 
     CPU_SetEentry(GEN_EXC_VEC);
-	SBD_DISPLAY("BEV0",0);
+	// SBD_DISPLAY("BEV0",0);
 	
-	printf("BEV in SR set to zero.\n");
+	// printf("BEV in SR set to zero.\n");
 #if NNAND
 #ifdef LS1FSOC
 	/*mutex nand use lpc pin*/
@@ -417,10 +417,10 @@ for(i=0;cfdata[i].cf_driver;i++)
 }
 #endif
 
-    printf("====before configure\n");
+    // printf("====before configure\n");
     configure();
    
-    printf("====before init ps/2 kbd\n");
+    // printf("====before init ps/2 kbd\n");
 #if (NMOD_VGACON >0) && defined(LS1FSOC)
         if(getenv("nokbd")) 
 	rc=1;
